@@ -23,7 +23,7 @@ namespace MultiChatServer
             public void ClearBuffer()
             {
                 Array.Clear(Buffer, 0, BufferSize);
-            }
+        }
         }
 
         #region Private Fields
@@ -58,7 +58,7 @@ namespace MultiChatServer
         void AcceptCallback(IAsyncResult ar)
         {
             Socket client = mainSocket.EndAccept(ar);
-
+            
             mainSocket.BeginAccept(AcceptCallback, null);
 
             AsyncObject obj = new AsyncObject(4096);
@@ -99,6 +99,19 @@ namespace MultiChatServer
 
             ao.WorkingSocket = mainSocket;
             mainSocket.BeginSend(ao.Buffer, 0, ao.Buffer.Length, SocketFlags.None, m_fnSendHandler, ao);
+        }
+
+        public void CreateSocket()
+        {
+            try
+            {
+                mainSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+            }
+            catch (Exception e)
+            {
+
+            }
+            
         }
 
         #region Handling Methods
