@@ -40,7 +40,7 @@ namespace MultiChatServer
         void AcceptCallback(IAsyncResult ar)
         {
             Socket client = mainSocket.EndAccept(ar);
-            mainSocket.BeginAccept(AcceptCallback, null);
+             mainSocket.BeginAccept(AcceptCallback, null);
 
             AsyncObject obj = new AsyncObject(4096);
             obj.WorkingSocket = client;

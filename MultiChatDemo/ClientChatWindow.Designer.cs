@@ -1,7 +1,7 @@
 ﻿
-namespace MultiChatServer
+namespace MultiChatDemo
 {
-    partial class ChatWindow
+    partial class ClientChatWindow
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,20 +30,20 @@ namespace MultiChatServer
         private void InitializeComponent()
         {
             this.OutermostPanel = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox_ChatHistory = new System.Windows.Forms.TextBox();
             this.TextSendPanel = new System.Windows.Forms.Panel();
-            this.Button_SendText = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox_SendMessage = new System.Windows.Forms.TextBox();
             this.SendTextLabelPanel = new System.Windows.Forms.Panel();
             this.Label_TextToBeSent = new System.Windows.Forms.Label();
+            this.Button_SendText = new System.Windows.Forms.Button();
             this.ConnectionPanel = new System.Windows.Forms.TableLayoutPanel();
             this.Button_ConnectToServer = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox_PortNumber = new System.Windows.Forms.TextBox();
             this.PortNumberLabelPanel = new System.Windows.Forms.Panel();
             this.Label_PortNumber = new System.Windows.Forms.Label();
             this.ServerAddressLabelPanel = new System.Windows.Forms.Panel();
             this.Label_ServerAddress = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_ServerAddress = new System.Windows.Forms.TextBox();
             this.OutermostPanel.SuspendLayout();
             this.TextSendPanel.SuspendLayout();
             this.SendTextLabelPanel.SuspendLayout();
@@ -54,7 +54,7 @@ namespace MultiChatServer
             // 
             // OutermostPanel
             // 
-            this.OutermostPanel.Controls.Add(this.textBox3);
+            this.OutermostPanel.Controls.Add(this.textBox_ChatHistory);
             this.OutermostPanel.Controls.Add(this.TextSendPanel);
             this.OutermostPanel.Controls.Add(this.ConnectionPanel);
             this.OutermostPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -63,44 +63,34 @@ namespace MultiChatServer
             this.OutermostPanel.Size = new System.Drawing.Size(800, 450);
             this.OutermostPanel.TabIndex = 0;
             // 
-            // textBox3
+            // textBox_ChatHistory
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(0, 37);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(800, 326);
-            this.textBox3.TabIndex = 1;
+            this.textBox_ChatHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ChatHistory.Location = new System.Drawing.Point(0, 37);
+            this.textBox_ChatHistory.Multiline = true;
+            this.textBox_ChatHistory.Name = "textBox_ChatHistory";
+            this.textBox_ChatHistory.Size = new System.Drawing.Size(800, 326);
+            this.textBox_ChatHistory.TabIndex = 1;
             // 
             // TextSendPanel
             // 
-            this.TextSendPanel.Controls.Add(this.Button_SendText);
-            this.TextSendPanel.Controls.Add(this.textBox4);
+            this.TextSendPanel.Controls.Add(this.textBox_SendMessage);
             this.TextSendPanel.Controls.Add(this.SendTextLabelPanel);
+            this.TextSendPanel.Controls.Add(this.Button_SendText);
             this.TextSendPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TextSendPanel.Location = new System.Drawing.Point(0, 363);
             this.TextSendPanel.Name = "TextSendPanel";
             this.TextSendPanel.Size = new System.Drawing.Size(800, 87);
             this.TextSendPanel.TabIndex = 2;
             // 
-            // Button_SendText
+            // textBox_SendMessage
             // 
-            this.Button_SendText.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_SendText.Location = new System.Drawing.Point(725, 0);
-            this.Button_SendText.Name = "Button_SendText";
-            this.Button_SendText.Size = new System.Drawing.Size(75, 87);
-            this.Button_SendText.TabIndex = 2;
-            this.Button_SendText.Text = "Send";
-            this.Button_SendText.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(98, 0);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(702, 87);
-            this.textBox4.TabIndex = 0;
+            this.textBox_SendMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_SendMessage.Location = new System.Drawing.Point(98, 0);
+            this.textBox_SendMessage.Multiline = true;
+            this.textBox_SendMessage.Name = "textBox_SendMessage";
+            this.textBox_SendMessage.Size = new System.Drawing.Size(627, 87);
+            this.textBox_SendMessage.TabIndex = 0;
             // 
             // SendTextLabelPanel
             // 
@@ -121,6 +111,17 @@ namespace MultiChatServer
             this.Label_TextToBeSent.Text = "Text to Send";
             this.Label_TextToBeSent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // Button_SendText
+            // 
+            this.Button_SendText.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_SendText.Location = new System.Drawing.Point(725, 0);
+            this.Button_SendText.Name = "Button_SendText";
+            this.Button_SendText.Size = new System.Drawing.Size(75, 87);
+            this.Button_SendText.TabIndex = 2;
+            this.Button_SendText.Text = "Send";
+            this.Button_SendText.UseVisualStyleBackColor = true;
+            this.Button_SendText.Click += new System.EventHandler(this.SendMessage);
+            // 
             // ConnectionPanel
             // 
             this.ConnectionPanel.ColumnCount = 5;
@@ -130,10 +131,10 @@ namespace MultiChatServer
             this.ConnectionPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.ConnectionPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.ConnectionPanel.Controls.Add(this.Button_ConnectToServer, 4, 0);
-            this.ConnectionPanel.Controls.Add(this.textBox2, 3, 0);
+            this.ConnectionPanel.Controls.Add(this.textBox_PortNumber, 3, 0);
             this.ConnectionPanel.Controls.Add(this.PortNumberLabelPanel, 2, 0);
             this.ConnectionPanel.Controls.Add(this.ServerAddressLabelPanel, 0, 0);
-            this.ConnectionPanel.Controls.Add(this.textBox1, 1, 0);
+            this.ConnectionPanel.Controls.Add(this.textBox_ServerAddress, 1, 0);
             this.ConnectionPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ConnectionPanel.Location = new System.Drawing.Point(0, 0);
             this.ConnectionPanel.Name = "ConnectionPanel";
@@ -152,14 +153,15 @@ namespace MultiChatServer
             this.Button_ConnectToServer.TabIndex = 4;
             this.Button_ConnectToServer.Text = "Connect";
             this.Button_ConnectToServer.UseVisualStyleBackColor = true;
+            this.Button_ConnectToServer.Click += new System.EventHandler(this.ConnectToServer);
             // 
-            // textBox2
+            // textBox_PortNumber
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(563, 7);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(114, 23);
-            this.textBox2.TabIndex = 3;
+            this.textBox_PortNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_PortNumber.Location = new System.Drawing.Point(563, 7);
+            this.textBox_PortNumber.Name = "textBox_PortNumber";
+            this.textBox_PortNumber.Size = new System.Drawing.Size(114, 23);
+            this.textBox_PortNumber.TabIndex = 3;
             // 
             // PortNumberLabelPanel
             // 
@@ -200,23 +202,23 @@ namespace MultiChatServer
             this.Label_ServerAddress.Text = "Server Address";
             this.Label_ServerAddress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // textBox_ServerAddress
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(123, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(314, 23);
-            this.textBox1.TabIndex = 0;
+            this.textBox_ServerAddress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_ServerAddress.Location = new System.Drawing.Point(123, 7);
+            this.textBox_ServerAddress.Name = "textBox_ServerAddress";
+            this.textBox_ServerAddress.Size = new System.Drawing.Size(314, 23);
+            this.textBox_ServerAddress.TabIndex = 0;
             // 
-            // ChatWindow
+            // ClientChatWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.OutermostPanel);
-            this.Name = "ChatWindow";
-            this.Text = "MultiChat Window";
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DigitFilter);
+            this.Name = "ClientChatWindow";
+            this.Text = "MultiChat Client";
+            this.Load += new System.EventHandler(this.OnFormLoaded);
             this.OutermostPanel.ResumeLayout(false);
             this.OutermostPanel.PerformLayout();
             this.TextSendPanel.ResumeLayout(false);
@@ -233,15 +235,15 @@ namespace MultiChatServer
         #endregion
 
         private System.Windows.Forms.Panel OutermostPanel;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox_ChatHistory;
         private System.Windows.Forms.Button Button_ConnectToServer;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox_PortNumber;
         private System.Windows.Forms.Label Label_PortNumber;
         private System.Windows.Forms.Label Label_ServerAddress;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_ServerAddress;
         private System.Windows.Forms.Panel TextSendPanel;
         private System.Windows.Forms.Button Button_SendText;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox_SendMessage;
         private System.Windows.Forms.Label Label_TextToBeSent;
         private System.Windows.Forms.TableLayoutPanel ConnectionPanel;
         private System.Windows.Forms.Panel PortNumberLabelPanel;
